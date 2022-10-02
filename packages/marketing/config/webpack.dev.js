@@ -1,6 +1,5 @@
 // merge allows us to take all the config inside common file and merge it
 // with configuration inside development file.
-
 const {merge} = require('webpack-merge');
 // takes some kind of HTML file inside of project and inject a couple of different scrip ttags inside of it
 const HtmlWebpackPlugin = require('html-webpack-plugin');
