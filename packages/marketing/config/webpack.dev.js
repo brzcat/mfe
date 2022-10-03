@@ -5,6 +5,7 @@ const {merge} = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // to take our dev config and merge together with config inside common file we want to merge it later using merge.
 const commonConfig = require('./webpack.common');
+const packageJSON = require('../package.json');
 
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
@@ -25,7 +26,7 @@ const devConfig = {
             exposes: {
                 './MarketingApp': './src/bootstrap'
             },
-            shared: ['react', 'react-dom']
+            shared: packageJSON.dependencies
         })
         ,new HtmlWebpackPlugin({
             template: './public/index.html'
