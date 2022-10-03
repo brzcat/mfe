@@ -6,6 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // to take our dev config and merge together with config inside common file we want to merge it later using merge.
 const commonConfig = require('./webpack.common');
 
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+
 const devConfig = {
     mode: 'development',
     devServer: {
@@ -15,6 +17,12 @@ const devConfig = {
         }
     },
     plugins: [
+        new ModuleFederationPlugin({
+           name: 'container',
+           remotes: {
+               marketing: 'marketing@http://localhost:8081/remoteEntry.js'
+           }
+        }),
         new HtmlWebpackPlugin({
             template: './public/index.html'
         })
