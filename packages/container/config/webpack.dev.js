@@ -1,8 +1,6 @@
 // merge allows us to take all the config inside common file and merge it
 // with configuration inside development file.
 const {merge} = require('webpack-merge');
-// takes some kind of HTML file inside of project and inject a couple of different scrip ttags inside of it
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 // to take our dev config and merge together with config inside common file we want to merge it later using merge.
 const commonConfig = require('./webpack.common');
 
@@ -24,9 +22,6 @@ const devConfig = {
                marketing: 'marketing@http://localhost:8081/remoteEntry.js'
            },
             shared: packageJSON.dependencies
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/index.html'
         })
     ],
 };
