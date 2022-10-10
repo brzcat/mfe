@@ -1,2 +1,5 @@
 /packages/**/node_modules/
 .idea
+dist
+node_modules
+.DS_STORE
