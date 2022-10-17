@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import App from './App';
-import { createMemoryHistory } from 'history';
+import {createBrowserHistory, createMemoryHistory} from 'history';
 //add our main startup code
 
 //Mount function to start up the app
-const mount = (el, { onNavigate }) => {
+const mount = (el, {onNavigate, defaultHistory}) => {
     console.log(`start`)
-    //el.innerHTML = 'hi'
-    const history = createMemoryHistory();
+    //el.innerHTML = 'hi
+    // if we have  default History provided use it otherwise use memory
+    const history = defaultHistory ||  createMemoryHistory();
 
     //whenever navigation happens it will call the function inside listen
     if (onNavigate) {
@@ -19,8 +20,8 @@ const mount = (el, { onNavigate }) => {
     // return object that container can call
     return {
         onParentNavigate(location) {
-            const { pathname: nextPathName} = location;
-            const { pathname: currentPathName} = history.location;
+            const {pathname: nextPathName} = location;
+            const {pathname: currentPathName} = history.location;
             if (nextPathName !== currentPathName) {
                 console.log('nextpathname ' + nextPathName)
                 history.push(nextPathName);
@@ -32,7 +33,7 @@ const mount = (el, { onNavigate }) => {
 if (process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#_marketing-dev-root')
     if (devRoot) {
-        mount(devRoot,{});
+        mount(devRoot, {defaultHistory: createBrowserHistory()});
     }
 }
 
