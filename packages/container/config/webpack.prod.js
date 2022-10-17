@@ -1,7 +1,7 @@
 const {merge} = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
-//eventually wepack can take care of package shared functions for us
+//eventually webpack can take care of package shared functions for us
 const packageJson = require('../package.json');
 
 //defined when we build CI/CD pipeline.
@@ -17,7 +17,7 @@ const prodConfig = {
         new ModuleFederationPlugin({
             name: 'container',
             remotes: {
-                marketing: `marketing@${domain}/marketing/remoteEntry.js`
+                marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`
             },
             shared: packageJson.dependencies
         })
