@@ -1,21 +1,27 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import App from './App';
+import { createMemoryHistory } from 'history';
 //add our main startup code
 
 //Mount function to start up the app
-const mount = (el) => {
+const mount = (el, { onNavigate }) => {
     console.log(`start`)
     //el.innerHTML = 'hi'
-    ReactDOM.render(<App/>, el)
+    const history = createMemoryHistory();
+
+    //whenever navigation happens it will call the function inside listen
+    if (onNavigate) {
+        history.listen(onNavigate);
+    }
+    ReactDOM.render(<App history={history}/>, el)
 };
 //if we are in development and in isolation call mount immediately
 if (process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#_marketing-dev-root')
     if (devRoot) {
-        mount(devRoot);
+        mount(devRoot,{});
     }
-
 }
 
 //we are running thru container and export mount function.
