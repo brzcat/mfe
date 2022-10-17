@@ -14,7 +14,19 @@ const mount = (el, { onNavigate }) => {
     if (onNavigate) {
         history.listen(onNavigate);
     }
-    ReactDOM.render(<App history={history}/>, el)
+    ReactDOM.render(<App history={history}/>, el);
+
+    // return object that container can call
+    return {
+        onParentNavigate(location) {
+            const { pathname: nextPathName} = location;
+            const { pathname: currentPathName} = history.location;
+            if (nextPathName !== currentPathName) {
+                console.log('nextpathname ' + nextPathName)
+                history.push(nextPathName);
+            }
+        }
+    }
 };
 //if we are in development and in isolation call mount immediately
 if (process.env.NODE_ENV === 'development') {

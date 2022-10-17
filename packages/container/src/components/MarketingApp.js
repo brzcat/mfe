@@ -4,9 +4,11 @@ import {useHistory} from 'react-router-dom';
 
 export default () => {
     const ref = useRef(null);
+    //browser history
     const history = useHistory();
+    // only run useEffect once
     useEffect(() => {
-        mount(ref.current, {
+        const { onParentNavigate } = mount(ref.current, {
             onNavigate: (location) => {
                 const {pathname: nextPathName} = location;
                 // check current path name and make sure our current path and next are different.
@@ -16,7 +18,9 @@ export default () => {
                 }
             }
         });
-    });
+
+       history.listen(onParentNavigate)
+    }, []);
 
     return <div ref={ref}/>;
 };
