@@ -9,6 +9,7 @@ export default () => {
     // only run useEffect once
     useEffect(() => {
         const { onParentNavigate } = mount(ref.current, {
+            initialPath: history.location.pathname,
             onNavigate: (location) => {
                 const {pathname: nextPathName} = location;
                 // check current path name and make sure our current path and next are different.

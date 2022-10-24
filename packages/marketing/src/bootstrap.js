@@ -5,11 +5,13 @@ import {createBrowserHistory, createMemoryHistory} from 'history';
 //add our main startup code
 
 //Mount function to start up the app
-const mount = (el, {onNavigate, defaultHistory}) => {
+const mount = (el, {onNavigate, defaultHistory, initialPath}) => {
     console.log(`start`)
     //el.innerHTML = 'hi
     // if we have  default History provided use it otherwise use memory
-    const history = defaultHistory ||  createMemoryHistory();
+    const history = defaultHistory || createMemoryHistory({
+        initialEntries: [initialPath]
+    });
 
     //whenever navigation happens it will call the function inside listen
     if (onNavigate) {
